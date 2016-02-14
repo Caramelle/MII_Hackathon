@@ -16,6 +16,8 @@
 
 // include the LCD library code:
 #include <LiquidCrystal.h>
+#include <string.h>
+
 #define GREEN 8
 #define BLUE 9
 #define RED 10
@@ -32,6 +34,8 @@ void setup() {
   lcd.begin(16, 2);
   // set up the serial connection.
   Serial.begin(9600);
+  pinMode(6,OUTPUT);
+  lcd.print("AC System");
 }
 
 void loop() {
@@ -42,6 +46,10 @@ void loop() {
   int redVal = 255;
   int blueVal = 255;
   int greenVal = 255;
+  
+  //inData = (char*)calloc(20,sizeof(char));
+  
+  digitalWrite(6, HIGH);
 
   analogWrite( GREEN, 255 - greenVal );
   analogWrite( RED, 255 - redVal );
@@ -64,7 +72,9 @@ void loop() {
     }
 
     if (inData[0] == 'T') {
-      lcd.print(strcpy(inData, inData + 1));
+      strcpy(inData, inData+1);
+      lcd.print(inData);
+      memset(inData, 0, strlen(inData));
     }
     lcd.print(" Degrees C");
   }
