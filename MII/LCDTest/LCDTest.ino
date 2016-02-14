@@ -46,6 +46,7 @@ void loop() {
   int redVal = 255;
   int blueVal = 255;
   int greenVal = 255;
+  index=0;
   
   //inData = (char*)calloc(20,sizeof(char));
   
